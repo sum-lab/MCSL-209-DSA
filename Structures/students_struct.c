@@ -1,13 +1,13 @@
 // Online C compiler to run C program online
 #include <stdio.h>
 
-int main() {
+struct Student {
+    int enrollmentNo;
+    char name[100];
+    float marks;
+};
 
-    struct Student {
-        int enrollmentNo;
-        char name[100];
-        float marks;
-    };
+int main() {
 
     int noOfStudent;
 
@@ -26,7 +26,7 @@ int main() {
         printf("\n Enter student name:");
         scanf("%s", student[i].name);
 
-        printf("Enter student's marks: ");
+        printf("\n Enter student's marks: ");
         scanf("%f", &student[i].marks);
     }
 
@@ -46,7 +46,7 @@ int main() {
         printf("\n Rank: %d", i+1 );
         printf("\n Enroll No: %d", student[i].enrollmentNo );
         printf("\n Name: %s", student[i].name );
-        printf("\n Marks: %.2f", student[i].marks);
+        printf("\n Marks: %.2f\n", student[i].marks);
     }
 
     return 0;
