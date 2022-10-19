@@ -13,6 +13,7 @@ node *front, *rear;
 void add(int item);
 int delete() ;
 void display();
+void reverse();
 
 void main() {
     int item, choice;
@@ -20,7 +21,7 @@ void main() {
     front = NULL;
 
     while(1) {
-        printf("Choose option\n 1. Add\n 2. Delete\n 3. Display\n Press other key to exit \n");
+        printf("Choose option\n 1. Add\n 2. Delete\n 3. Display\n 4. Reverse\n Press other key to exit \n");
         scanf("%d", &choice);
 
         switch(choice) {
@@ -35,6 +36,9 @@ void main() {
                 break;
             case 3:
                 display();
+                break;
+            case 4:
+                reverse();
                 break;
             default:
                 goto end;
@@ -68,7 +72,7 @@ int delete() {
     int data = front -> data;
     front = front -> next;
 
-    if (front -> next == NULL)
+    if (front == NULL)
         front = rear = NULL;
 
     return data;
@@ -84,4 +88,13 @@ void display() {
         printf("\n %d", temp ->data);
         temp = temp->next;
     }
+}
+
+void reverse() {
+    if (front == NULL) {
+        return;
+    }
+    int element = delete();
+    reverse();
+    add(element);
 }

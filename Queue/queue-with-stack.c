@@ -5,7 +5,7 @@ struct stack
 { 
     int elements[100];
     int top;
-} frontstack, rearstack;
+} stack1, stack2;
 
 
 void push(struct stack* stack, int value) {
@@ -29,39 +29,47 @@ int pop(struct stack* stack) {
 }
 
 void enqueue(int value) {
-    push(&rearstack, value);
+    push(&stack1, value);
 }
 
 int dequeue() {
-    int value;
-    if (frontstack.top == -1 && rearstack.top == -1) {
+    int value, temp;
+    if (stack1.top == -1 && stack2.top == -1) {
         printf("Queue is empty.");
-    } else if (frontstack.top == -1) {
-        value = pop(&rearstack);
-        push(&frontstack, value);
+    } else {
+        while (stack1.top != -1)
+        {
+            temp = pop(&stack1);
+            push(&stack2, temp);
+        }
+        value = pop(&stack2);
+        while (stack2.top != -1)
+        {
+            temp = pop(&stack2);
+            push(&stack1, temp);
+        }
     } 
-    value = pop(&frontstack);
     return value;
 }
 
 void display() {
-    if (frontstack.top == -1 && rearstack.top == -1) {
+    if (stack1.top == -1 && stack2.top == -1) {
         printf("Queue is empty.");
-        return
+        return;
     }
-    int top1 = frontstack.top;
-    int top2 = rearstack.top;
+    int top1 = stack1.top;
+    int top2 = stack2.top;
     for(int i = 0; i <= top1; i++) {
-        printf("%d\n", frontstack.elements[i]);
+        printf("%d\n", stack1.elements[i]);
     }
     for(int i = 0; i <= top2; i++) {
-        printf("%d\n", rearstack.elements[i]);
+        printf("%d\n", stack2.elements[i]);
     }
 }
 
 int main() {
-    frontstack.top = -1;
-    rearstack.top = -1;
+    stack1.top = -1;
+    stack2.top = -1;
 
     int f = 0, a;
     char ch = 'y';
